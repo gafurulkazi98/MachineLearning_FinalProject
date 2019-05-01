@@ -1,0 +1,75 @@
+#this is from the slides for logisitic regression
+from sklearn.linear_model import LogisticRegression
+clf = LogisticRegression(solver='lbfgs',multi_class='multinomial')
+clf.fit(X_train, y_train)
+yhat_test = clf.predict(X_test)
+score = clf.score(X_test, y_test)
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
+from sklearn.metrics import classification_report
+
+#helpful link for log reg: https://towardsdatascience.com/logistic-regression-a-simplified-approach-using-python-c4bc81a87c31\n",
+
+#train test split:\n",
+#preprocessing to scale the data and use train_test_split to split the data (70% train and 30% test)\n",
+x_scale = preprocessing.scale(X)
+x_train, x_test, y_train, y_test = train_test_split(x_scale, Y)
+print(x_train.shape)
+print(y_train.shape)
+
+#this trains and predicts\n",
+logmodel = LogisticRegression()
+logmodel.fit(X_train,y_train)
+predictions = logmodel.predict(X_test)
+
+#check precision, recall, f1-score using classification report\n",
+print(classification_report(y_test,predictions))
+
+#another option found in hw5
+#log reg with lasso(l1) regularization
+# Initialize an empty list to store values of training set accuracy.
+acc_train_logreg = []
+# Initialize an empty list to store values of test set accuracy.
+acc_test_logreg = []
+# Initialize an empty list to store different values of parameter 'c'.
+c_logreg = []
+# Complete the function logreg that accepts 'c' as a parameter, which is used to create logreg model 
+# with different values of C.
+def logreg_model(c , X_train, Y_train, X_test, Y_test):
+    # Create an object of logistic regression model using linear_model.
+    # Pass the value of penalty as 'L1'. By default, it is 'L2'.
+    # Pass the value of C = c. Note that C is the inverse of lambda. So, small value of C i.e. b/w 0 and 1 \n",
+    # means stronger regularization and large value means less regularization.\n",
+    # Also, in sklearn, L1 is only supported with solver = 'saga'. Solver is the type of optimization algorithm like GDA or\n",
+    # SGDA, which is to be used. So, 'saga' is another algorithm like that. Pass the value of solver as 'saga
+    #Create the Logistic Regression model object as described above and save it to logreg\n",
+    
+    logreg = linear_model.LogisticRegression(C=c,penalty='l1', warm_start=True, solver='saga')
+    
+    #Fit the model on the training set\n",
+    logreg.fit(X_train, Y_train)
+    
+    #Find the prediction on training set\n",
+    Yhat_train = logreg.predict(X_train)
+    
+    # Adding training accuracy to acc_train_logreg\n",
+    acc_train = np.mean(Yhat_train == Y_train)
+    acc_train_logreg.append(acc_train)
+    print(\"Accuracy on training data = %f\" % acc_train)
+    
+    #Find the prediction on test set\n",
+    Yhat_test = logreg.predict(X_test)
+    
+    # Adding testing accuracy to acc_test_logreg\n",
+    acc_test = np.mean(Yhat_test == Y_test)
+    acc_test_logreg.append(acc_test)
+    print(\"Accuracy on test data = %f\" % acc_test)
+    # Appending value of c for graphing purposes\n",
+    c_logreg.append(c)
+    
+    
+#pick an appropriate value for c and CHANGE the next line:\n",
+c = 10000
+logreg_model(c,x_train,y_train,x_test,x_train)
