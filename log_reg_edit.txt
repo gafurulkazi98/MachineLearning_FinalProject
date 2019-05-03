@@ -92,7 +92,7 @@ from sklearn import svm
 
 def svm_linear(c, svm_kernel = "linear"):
     # TODO - Create an object of svm.SVC(probability = False, kernel = 'linear', C = c) - 5 points
-    svc_linear = svm.SVC(probability = False, kernel = 'linear', C = c)
+    svc_linear = svm.SVC(probability = False, kernel = svm_kernel, C = c)
     
     # TODO - Fit the classifier on the training set - 5 points
     svc_linear.fit(X_train, Y_train)
