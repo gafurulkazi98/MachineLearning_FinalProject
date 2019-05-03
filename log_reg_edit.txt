@@ -73,3 +73,45 @@ def logreg_model(c , X_train, Y_train, X_test, Y_test):
 #pick an appropriate value for c and CHANGE the next line:\n",
 c = 10000
 logreg_model(c,x_train,y_train,x_test,x_train)
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#svm code
+
+acc_train_svm_linear = []
+acc_test_svm_linear = []
+c_svm_linear = []
+
+from sklearn import svm
+
+
+#use svm_kernel parameter to choose svm model type. 3 kernel options: "linear"[default], "rbf", "poly"
+
+def svm_linear(c, svm_kernel = "linear"):
+    # TODO - Create an object of svm.SVC(probability = False, kernel = 'linear', C = c) - 5 points
+    svc_linear = svm.SVC(probability = False, kernel = 'linear', C = c)
+    
+    # TODO - Fit the classifier on the training set - 5 points
+    svc_linear.fit(X_train, Y_train)
+    
+    # TODO - Find the prediction and accuracy on the training set - 5 points
+    Yhat_svc_linear_train = svc_linear.predict(X_train)
+    acc_train = np.mean(Yhat_svc_linear_train == Y_train)
+    
+    # Adding testing accuracy to acc_train_svm
+    acc_train_svm_linear.append(acc_train)
+    print('Train Accuracy = {0:f}'.format(acc_train))
+    
+    # TODO - Find the prediction and accuracy on the test set - 5 points
+    Yhat_svc_linear_test = svc_linear.predict(X_test)
+    acc_test = np.mean(Yhat_svc_linear_test == Y_test)
+    
+    # Adding testing accuracy to acc_test_svm
+    acc_test_svm_linear.append(acc_test)
+    print('Test Accuracy = {0:f}'.format(acc_test))
+    
+    # Appending value of c for graphing purposes
+    c_svm_linear.append(c)
