@@ -115,3 +115,20 @@ def svm_linear(c, svm_kernel = "linear"):
     
     # Appending value of c for graphing purposes
     c_svm_linear.append(c)
+
+
+========================================================================
+#code to change non-float data to floats
+
+row_num = 1
+column_num = 1
+csv = open("data.csv","w")
+for row in X:
+    for column in row:
+        if type(column) != float:
+            print("row=" + str(row_num) + "," + " column=" + str(column_num) + " data= ")
+            print(str(column) + " not float but ")
+            column = float(column)
+            print("now the val is of type: " + str(type(column)) + "\n")
+        column_num += 1
+    row_num += 1
