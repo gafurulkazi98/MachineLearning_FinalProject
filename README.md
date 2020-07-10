@@ -1,5 +1,5 @@
 # MachineLearning_FinalProject
-This is my collaborative final project for Machine Learning course at NYU Tandon
+This is my collaborative final project for Machine Learning course at NYU Tandon (select SUBMITTED FINAL PROJECT.ipynb)
 
 This is a project in which 3 machine learning algorithms, Logistic Regression, Support Vector Machines, and Neural Networks
 
